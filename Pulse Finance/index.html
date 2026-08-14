@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pulse is a simple personal finance tracker for better everyday decisions.">
+  <link rel="icon" href="./favicon_io/favicon-32x32.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="./marketing.css">
+  <title>Pulse — Personal finance, made clear</title>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html"><span class="brand-mark"><i class="fa-solid fa-bolt"></i></span> Pulse</a>
+    <button class="menu-button" aria-label="Open navigation" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+    <nav class="site-nav">
+      <a class="active" href="index.html"><i class="fa-solid fa-house"></i> Home</a><a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a><a href="features.html"><i class="fa-solid fa-star"></i> Features</a><a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a>
+    </nav>
+    <div class="nav-actions"><a class="login-link" href="login.html">Log in</a><a class="button button-small" href="sign-up.html">Get started <i class="fa-solid fa-arrow-right"></i></a></div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy reveal">
+        <p class="eyebrow"><span></span> Money management, simplified</p>
+        <h1>Make every <em>rupee</em> feel intentional.</h1>
+        <p class="hero-text">Understand your cash flow, build a healthier spending rhythm and move toward the life you want — one clear view at a time.</p>
+        <div class="hero-actions"><a class="button" href="sign-up.html">Start for free <i class="fa-solid fa-arrow-right"></i></a><a class="text-link" href="features.html">Explore features <i class="fa-solid fa-play"></i></a></div>
+        <div class="trusted"><div class="avatars"><span>R</span><span>S</span><span>A</span></div><p><strong>2,000+ mindful spenders</strong><br>are building better habits</p></div>
+      </div>
+      <div class="hero-visual reveal delay-1" aria-label="Example finance summary">
+        <div class="orb orb-one"></div><div class="orb orb-two"></div>
+        <div class="dashboard-card">
+          <div class="card-top"><div><p>Good morning, Alex</p><strong>Your monthly overview</strong></div><span class="more"><i class="fa-solid fa-ellipsis"></i></span></div>
+          <div class="balance"><span>Available balance</span><h2>₹ 48,260<span>.00</span></h2><small><i class="fa-solid fa-arrow-trend-up"></i> 12.4% from last month</small></div>
+          <div class="chart"><div class="chart-label"><strong>Spending activity</strong><span>Last 7 days</span></div><div class="bars"><i style="height:40%"></i><i style="height:62%"></i><i style="height:45%"></i><i style="height:78%"></i><i style="height:55%"></i><i style="height:90%"></i><i style="height:66%"></i></div><div class="days"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div></div>
+          <!-- Monthly spending chart (added) -->
+          <div class="monthly-chart" style="margin-top:12px;">
+            <canvas id="monthly-spend-chart" aria-label="Monthly spending chart" role="img" style="width:100%;height:120px;display:block"></canvas>
+          </div>
+          <div class="expense"><span class="expense-icon"><i class="fa-solid fa-bag-shopping"></i></span><div><strong>Shopping</strong><small>Today, 10:23 AM</small></div><b>- ₹1,240</b></div>
+        </div>
+        <div class="floating-card saving"><span><i class="fa-solid fa-piggy-bank"></i></span><div><small>Saving goal</small><strong>68% complete</strong></div></div>
+        <div class="floating-card income"><i class="fa-solid fa-arrow-trend-up"></i> + ₹8,400</div>
+      </div>
+    </section>
+
+    <section class="logo-strip"><p>Built for your everyday financial wins</p><div><span>Clarity</span><span>Focus</span><span>Momentum</span><span>Freedom</span></div></section>
+
+    <section class="section feature-intro">
+      <div class="section-heading reveal"><p class="eyebrow"><span></span> Everything in one place</p><h2>Small actions. <em>Real progress.</em></h2><p>Pulse removes the noise so you can spend with confidence and save with purpose.</p></div>
+      <div class="feature-grid">
+        <article class="feature-card reveal"><div class="icon mint"><i class="fa-solid fa-wallet"></i></div><h3>See your whole picture</h3><p>Income, spending and balances are organized into one calm dashboard.</p><a href="features.html">Discover more <i class="fa-solid fa-arrow-right"></i></a></article>
+        <article class="feature-card feature-highlight reveal delay-1"><div class="icon lavender"><i class="fa-solid fa-bullseye"></i></div><h3>Give goals a deadline</h3><p>Turn vague hopes into a plan with visual saving goals that keep you motivated.</p><div class="mini-progress"><span></span></div><small>Holiday fund · 68% reached</small></article>
+        <article class="feature-card reveal delay-2"><div class="icon peach"><i class="fa-solid fa-chart-pie"></i></div><h3>Know where it goes</h3><p>Simple categories surface the habits worth celebrating — or changing.</p><a href="features.html">Discover more <i class="fa-solid fa-arrow-right"></i></a></article>
+      </div>
+    </section>
+
+    <section class="section habit-section">
+      <div class="habit-visual reveal"><div class="ring"><div><strong>72%</strong><span>monthly goal</span></div></div><div class="habit-stat one"><i class="fa-solid fa-check"></i><span><strong>5 days</strong> under budget</span></div><div class="habit-stat two"><span class="coffee">☕</span><span><strong>₹ 320</strong> coffee this week</span></div></div>
+      <div class="habit-copy reveal delay-1"><p class="eyebrow"><span></span> A better money routine</p><h2>Less guessing.<br><em>More growing.</em></h2><p>Set a monthly budget, add transactions in seconds, then let the patterns tell you what to do next.</p><ul><li><i class="fa-solid fa-check"></i> Quick daily expense logging</li><li><i class="fa-solid fa-check"></i> Flexible currency support</li><li><i class="fa-solid fa-check"></i> Downloadable reports</li></ul><a class="button button-dark" href="./Personal-Finance-Tracker-main/index.html">Open the tracker <i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+    </section>
+
+    <section class="section numbers"><div class="section-heading centered reveal"><p class="eyebrow"><span></span> Your next chapter starts here</p><h2>Good money habits add up.</h2></div><div class="number-grid"><div class="reveal"><strong data-count="2000">0</strong><span>people tracking with Pulse</span></div><div class="reveal delay-1"><strong data-count="86">0</strong><span>say they feel more in control</span></div><div class="reveal delay-2"><strong data-count="24">0</strong><span>hours saved per year</span></div></div></section>
+
+    <section class="section faq-section"><div class="section-heading reveal"><p class="eyebrow"><span></span> Questions, answered</p><h2>Simple by design.</h2></div><div class="faq-list reveal delay-1"><details open><summary>Is Pulse free to use?<i class="fa-solid fa-plus"></i></summary><p>Yes. You can start tracking your personal income and expenses for free.</p></details><details><summary>Can I use different currencies?<i class="fa-solid fa-plus"></i></summary><p>Yes. The tracker supports INR, USD and EUR, so your view stays useful wherever you are.</p></details><details><summary>Where do I access my tracker?<i class="fa-solid fa-plus"></i></summary><p>After signing up, open the tracker from the navigation or the “Open the tracker” button above.</p></details></div></section>
+
+    <section class="cta reveal"><div><p class="eyebrow"><span></span> Start today</p><h2>Your money deserves<br>your attention.</h2></div><a class="button button-light" href="sign-up.html">Create your free account <i class="fa-solid fa-arrow-right"></i></a></section>
+  </main>
+  <footer class="site-footer"><a class="brand" href="index.html"><span class="brand-mark"><i class="fa-solid fa-bolt"></i></span> Pulse</a><p>Personal finance, made clear.</p><div><a href="about.html">About</a><a href="features.html">Features</a><a href="contact.html">Contact</a></div><small>© 2026 Pulse Finance. Made for better decisions.</small></footer>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="./marketing.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="icon" href="./favicon_io/favicon-32x32.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="./marketing.css">
+  <title>Sign Up — Pulse</title>
+  <style>
+    .auth-layout { max-width: 480px; margin: 60px auto 100px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html"><span class="brand-mark"><i class="fa-solid fa-bolt"></i></span> Pulse</a>
+    <button class="menu-button" aria-label="Open navigation" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+    <nav class="site-nav">
+      <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+      <a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a>
+      <a href="features.html"><i class="fa-solid fa-star"></i> Features</a>
+      <a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="login-link" href="login.html">Log in</a>
+      <a class="button button-small" href="sign-up.html">Get started</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="section auth-layout">
+      <div class="section-heading centered reveal">
+        <h2>Create an account</h2>
+        <p>Start your journey to better financial decisions.</p>
+      </div>
+      <form class="contact-form reveal delay-1" id="signupForm">
+        <label>Full Name
+          <input type="text" id="fullname" name="fullname" required placeholder="Alex Sharma">
+        </label>
+        <label>Email Address
+          <input type="email" id="email" name="email" required placeholder="alex@example.com">
+        </label>
+        <div class="field-row">
+          <label>Password
+            <input type="password" id="password" name="password" required placeholder="••••••••">
+          </label>
+          <label>Confirm Password
+            <input type="password" id="confirm-password" name="confirm-password" required placeholder="••••••••">
+          </label>
+        </div>
+        <label style="display: flex; align-items: center; gap: 8px; font-weight: normal; font-size: 13px;">
+          <input type="checkbox" id="show-password" style="width: auto; margin: 0;"> Show Password
+        </label>
+        <button class="button" type="submit" style="width: 100%; justify-content: center; margin-top: 15px;">Sign Up <i class="fa-solid fa-arrow-right"></i></button>
+        <p class="form-message">Creating your account...</p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand" href="index.html"><span class="brand-mark"><i class="fa-solid fa-bolt"></i></span> Pulse</a>
+    <p>Personal finance, made clear.</p>
+    <div>
+      <a href="about.html">About</a>
+      <a href="features.html">Features</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <small>© 2026 Pulse Finance.</small>
+  </footer>
+
+  <script src="./marketing.js"></script>
+  <script>
+    const password = document.getElementById("password");
+    const confirmPassword = document.getElementById("confirm-password");
+    
+    document.getElementById("show-password").addEventListener("change", (event) => {
+      const type = event.target.checked ? "text" : "password";
+      password.type = type;
+      confirmPassword.type = type;
+    });
+
+    document.getElementById("signupForm").addEventListener("submit", function(event) {
+      if (password.value !== confirmPassword.value) {
+        event.preventDefault();
+        confirmPassword.setCustomValidity("Passwords do not match.");
+        confirmPassword.reportValidity();
+      } else {
+        event.preventDefault();
+        confirmPassword.setCustomValidity("");
+        this.querySelector('.form-message').classList.add('show');
+        // Set authentication flag
+        localStorage.setItem('isLoggedIn', 'true');
+        // Redirect to tracker page
+        setTimeout(() => {
+          window.location.href = './Personal-Finance-Tracker-main/index.html';
+        }, 800);
+      }
+    });
+  </script>
+</body>
+</html>
+
+
