@@ -118,19 +118,6 @@ Health Check API: `http://localhost:3000/api/health`
 
 ---
 
-## 🌐 Deployment Guide (Render & Cloud MySQL)
-
-1. Push your repository to GitHub (ensure `.gitignore` excludes `node_modules` and `.env`).
-2. Create a MySQL Database on a cloud provider (e.g. Aiven, PlanetScale, Railway).
-3. Import `schema.sql` into your cloud database instance.
-4. On **Render**:
-   - Create a new **Web Service** and connect your GitHub repository.
-   - Set **Build Command**: `npm install`
-   - Set **Start Command**: `npm start`
-   - Add Environment Variables (`DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`, `JWT_SECRET`).
-
----
-
 ## 📝 Future Enhancements
 * Email verification and OTP password reset.
 * Dark / Light mode toggle.
