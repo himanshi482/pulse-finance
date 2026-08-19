@@ -117,6 +117,30 @@ Visit the application at: `http://localhost:3000`
 Health Check API: `http://localhost:3000/api/health`
 
 ---
+## 📸 Screenshots
+
+### Landing Page
+
+
+![Landing Page](screenshots/landing-page.png)
+
+### Login Page
+
+![Login Page](screenshots/login-page.png)
+
+### Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+### Budget Tracker
+
+![Budget Tracker](screenshots/budget-tracker.png)
+
+### Transaction History
+
+![Transaction History](screenshots/transaction-history.png)
+
+---
 
 ## 📝 Future Enhancements
 * Email verification and OTP password reset.
