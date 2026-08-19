@@ -39,28 +39,63 @@ let transactions = [];
 let editedTransaction = null;
 
 // Function to add a new transaction
-function addTransaction() {
+async function addTransaction() {
   const descriptionInput = document.getElementById("description");
   const amountInput = document.getElementById("amount");
   const typeInput = document.getElementById("type");
   const dateInput = document.getElementById("date");
 
-  const description = descriptionInput.value;
+  if (!descriptionInput || !amountInput || !typeInput) return;
+
+  const description = descriptionInput.value ? descriptionInput.value.trim() : "";
   const amount = parseFloat(amountInput.value);
-  const type = typeInput.value;
-  const chosenDate = new Date(dateInput.value);
+  const type = typeInput.value || "expense";
+  let rawDate = dateInput ? dateInput.value : "";
+  if (!rawDate) {
+    rawDate = new Date().toISOString().split("T")[0];
+  }
+  const chosenDate = new Date(rawDate);
 
-  // Clear the input fields
-  descriptionInput.value = "";
-  amountInput.value = "";
-  dateInput.value = "";
-
-  // Validate the input
-  if (description.trim() === "" || isNaN(amount) || isNaN(chosenDate)) {
+  // Validate the input BEFORE clearing fields
+  if (!description || isNaN(amount) || amount <= 0 || isNaN(chosenDate.getTime())) {
+    alert("Please enter a valid description, amount, and date.");
     return;
   }
 
-  // Create a new transaction object
+  // Sync with REST API if user is logged in
+  const token = localStorage.getItem("pulse_token");
+  if (token) {
+    try {
+      const res = await fetch("/api/transactions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          description: description,
+          amount: amount,
+          type: type,
+          category: "Other",
+          date: rawDate
+        })
+      });
+      if (!res.ok) {
+        const errData = await res.json();
+        alert(errData.error || "Failed to save transaction.");
+        return;
+      }
+    } catch (err) {
+      console.error("API Error adding transaction:", err);
+    }
+  }
+
+  // Clear the input fields AFTER validation & submission
+  descriptionInput.value = "";
+  amountInput.value = "";
+  if (dateInput) dateInput.value = "";
+
+  // Create local transaction object
   const transaction = {
     primeId: chosenDate.getTime(),
     description: description,
@@ -71,10 +106,8 @@ function addTransaction() {
   // Add the transaction to the array
   transactions.push(transaction);
 
-  // Update the balance
+  // Update balance and table
   updateBalance();
-
-  // Update the transaction table
   updateTransactionTable();
 }
 

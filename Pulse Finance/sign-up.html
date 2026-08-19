@@ -72,6 +72,8 @@
   <script>
     const password = document.getElementById("password");
     const confirmPassword = document.getElementById("confirm-password");
+    const signupForm = document.getElementById("signupForm");
+    const formMessage = signupForm.querySelector('.form-message');
     
     document.getElementById("show-password").addEventListener("change", (event) => {
       const type = event.target.checked ? "text" : "password";
@@ -79,25 +81,56 @@
       confirmPassword.type = type;
     });
 
-    document.getElementById("signupForm").addEventListener("submit", function(event) {
+    signupForm.addEventListener("submit", async function(event) {
+      event.preventDefault();
+      
       if (password.value !== confirmPassword.value) {
-        event.preventDefault();
         confirmPassword.setCustomValidity("Passwords do not match.");
         confirmPassword.reportValidity();
-      } else {
-        event.preventDefault();
-        confirmPassword.setCustomValidity("");
-        this.querySelector('.form-message').classList.add('show');
-        // Set authentication flag
+        return;
+      }
+      confirmPassword.setCustomValidity("");
+
+      const fullname = document.getElementById("fullname").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const passVal = password.value;
+
+      formMessage.style.color = "var(--ink)";
+      formMessage.textContent = "Creating your account...";
+      formMessage.classList.add('show');
+
+      try {
+        const response = await fetch('/api/auth/signup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fullname, email, password: passVal })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to create account.');
+        }
+
+        // Store JWT token and user info
+        localStorage.setItem('pulse_token', data.token);
+        localStorage.setItem('pulse_user', JSON.stringify(data.user));
         localStorage.setItem('isLoggedIn', 'true');
-        // Redirect to tracker page
+
+        formMessage.style.color = "var(--green)";
+        formMessage.textContent = "Account created! Redirecting...";
+
         setTimeout(() => {
           window.location.href = './Personal-Finance-Tracker-main/index.html';
         }, 800);
+      } catch (err) {
+        formMessage.style.color = "#d9534f";
+        formMessage.textContent = err.message;
       }
     });
   </script>
 </body>
 </html>
+
 
 

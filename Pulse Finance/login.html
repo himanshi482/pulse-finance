@@ -41,7 +41,7 @@
           <input type="password" id="password" name="password" required placeholder="••••••••">
         </label>
         <button class="button" type="submit" style="width: 100%; justify-content: center; margin-top: 15px;">Log in <i class="fa-solid fa-arrow-right"></i></button>
-        <p style="text-align: center; margin-top: 20px; font-size: 13px;"><a href="#" style="color: var(--green); font-weight: 800;">Forgot Password?</a></p>
+        <p style="text-align: center; margin-top: 20px; font-size: 13px;"><a href="forgot-password.html" style="color: var(--green); font-weight: 800;">Forgot Password?</a></p>
         <p class="form-message">Logging you in...</p>
       </form>
     </section>
@@ -60,18 +60,51 @@
 
   <script src="./marketing.js"></script>
   <script>
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
+    const loginForm = document.getElementById('loginForm');
+    const formMessage = loginForm.querySelector('.form-message');
+
+    loginForm.addEventListener('submit', async function(event) {
       event.preventDefault();
-      this.querySelector('.form-message').classList.add('show');
-      // Set authentication flag
-      localStorage.setItem('isLoggedIn', 'true');
-      // Redirect to tracker page
-      setTimeout(() => {
-        window.location.href = './Personal-Finance-Tracker-main/index.html';
-      }, 800);
+      
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+
+      formMessage.style.color = 'var(--ink)';
+      formMessage.textContent = 'Logging you in...';
+      formMessage.classList.add('show');
+
+      try {
+        const response = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Login failed. Please check your credentials.');
+        }
+
+        // Store authentication token and user profile
+        localStorage.setItem('pulse_token', data.token);
+        localStorage.setItem('pulse_user', JSON.stringify(data.user));
+        localStorage.setItem('isLoggedIn', 'true');
+
+        formMessage.style.color = 'var(--green)';
+        formMessage.textContent = 'Success! Redirecting to tracker...';
+
+        setTimeout(() => {
+          window.location.href = './Personal-Finance-Tracker-main/index.html';
+        }, 800);
+      } catch (err) {
+        formMessage.style.color = '#d9534f';
+        formMessage.textContent = err.message;
+      }
     });
   </script>
 </body>
 </html>
+
 
 

@@ -52,3 +52,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+// Display logged-in user's name on landing and marketing pages
+document.addEventListener('DOMContentLoaded', () => {
+  const userStr = localStorage.getItem('pulse_user');
+  const token = localStorage.getItem('pulse_token');
+  if (userStr && token) {
+    try {
+      const user = JSON.parse(userStr);
+      const navActions = document.querySelector('.nav-actions');
+      if (navActions && user && user.fullname) {
+        navActions.innerHTML = `
+          <span style="font-size:14px;font-weight:700;color:var(--green, #1c563d);display:flex;align-items:center;gap:6px;">👤 ${user.fullname}</span>
+          <a class="button button-small" href="./Personal-Finance-Tracker-main/index.html">Dashboard <i class="fa-solid fa-arrow-right"></i></a>
+        `;
+      }
+    } catch (e) {}
+  }
+});
+
